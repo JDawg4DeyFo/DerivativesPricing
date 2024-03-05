@@ -63,10 +63,15 @@ int main() {
         RandomNum = dist(gen);
 
         // Calculate x of f(x)
+        CurrentIteration = InitialPrice * exp((ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2))) + (Sigma * sqrt(ExpiryDate) * RandomNum));
 
         // f(x)
         IterativeValue += PayOff(CurrentIteration);
     }
+
+    // Multiply result by exp(-rT)/N
+    IterativeValue /= Iterations;
+    IterativeValue *= exp(-RiskFreeReturn * ExpiryDate);
 
     return 0;
 }
