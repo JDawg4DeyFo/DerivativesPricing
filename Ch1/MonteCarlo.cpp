@@ -1,17 +1,14 @@
 #include <iostream>
 #include <random>
 
-double PayOff (double AssetValue) {
-    return 0;
-}
 
 int main() {
     int i;
     // Constants
     double RiskFreeReturn, ExpiryDate, InitialPrice, Sigma, Iterations;
     // Iteration variables.
-    double CurrentIteration, IterativeValue;
-    int RandomNum;
+    double CurrentIteration, IterativeValue, RandomNum;
+	double DebugVariable;
 
 
     // Seed RNG
@@ -55,23 +52,34 @@ int main() {
         return 0;
     }
     std::cout << std::endl;
-
-
+	
+	// Debugging
+	RandomNum = dist(gen);
+	std::cout << "RandomNum for debug: " << RandomNum << std::endl;
+	DebugVariable = sqrt(ExpiryDate);
+	std::cout << "DebugVariable: " << DebugVariable << std::endl;
+	DebugVariable = (Sigma * sqrt(ExpiryDate) * RandomNum);
+	std::cout << "DebugVariable sigma sqrtexpiry random: " << DebugVariable << std::endl;
+	DebugVariable = ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2));
+	std::cout << "DebugVariable expiry risk pow sigma 2: " << DebugVariable << std::endl;
+	DebugVariable =	InitialPrice * exp((ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2))) + (Sigma * sqrt(ExpiryDate) * RandomNum));
+	std::cout << "Iteration equivalent debug: " << DebugVariable << std::endl;
+			
     // Main iteration
     for (i = 1, IterativeValue = 0; i <= Iterations; i++) {
         // Choose Random (0,1)
         RandomNum = dist(gen);
-
-        // Calculate x of f(x)
+        // Calculate f(x)
         CurrentIteration = InitialPrice * exp((ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2))) + (Sigma * sqrt(ExpiryDate) * RandomNum));
 
-        // f(x)
-        IterativeValue += PayOff(CurrentIteration);
+        if (CurrentIteration > 0) {
+	IterativeValue += CurrentIteration;
+	}
     }
 
     // Multiply result by exp(-rT)/N
     IterativeValue /= Iterations;
     IterativeValue *= exp(-RiskFreeReturn * ExpiryDate);
-
+	std::cout << "Calculated Value: " << IterativeValue << std::endl;
     return 0;
 }
