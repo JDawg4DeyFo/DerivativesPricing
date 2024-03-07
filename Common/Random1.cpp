@@ -31,5 +31,8 @@ double GetOneGaussianByBoxMuller() {
 
         SizeSquared = x*x + y*y;
     } while (SizeSquared >= 1.0);
+
+    Result = x * sqrt(-2 * log(SizeSquared) / SizeSquared);
     
+    return Result;
 }

@@ -8,7 +8,7 @@ HELLO_WORLD = HelloWorld
 MONTECARLO = Ch1/MonteCarlo
 #Source files
 HELLO_SRCS = HelloWorld.cpp
-MONTECARLO_SRCS = Ch1/MonteCarlo.cpp
+MONTECARLO_SRCS = Ch1/MonteCarlo.cpp Common/Random1.cpp
 
 
 # Make All

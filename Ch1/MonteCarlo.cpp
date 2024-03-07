@@ -2,6 +2,8 @@
 #include <cmath>
 #include <random>
 
+#include "../Common/Random1.h"
+
 
 int main() {
 	int i;
@@ -10,14 +12,6 @@ int main() {
 	// Iteration variables.
 	double CurrentIteration, IterativeValue, RandomNum;
 	double DebugVariable;
-
-
-	// Seed RNG
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	// Define normal distribution
-	std::normal_distribution<double> dist(0.0, 1.0);
-
 
 	// Ask user for constant values
 	std::cout << "Please provide a risk free return rate: ";
@@ -55,21 +49,21 @@ int main() {
 	std::cout << std::endl;
 	
 	// Debugging
-	RandomNum = dist(gen);
-	std::cout << "RandomNum for debug: " << RandomNum << std::endl;
-	DebugVariable = sqrt(ExpiryDate);
-	std::cout << "DebugVariable: " << DebugVariable << std::endl;
-	DebugVariable = (Sigma * sqrt(ExpiryDate) * RandomNum);
-	std::cout << "DebugVariable sigma sqrtexpiry random: " << DebugVariable << std::endl;
-	DebugVariable = ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2));
-	std::cout << "DebugVariable expiry risk pow sigma 2: " << DebugVariable << std::endl;
-	DebugVariable =	InitialPrice * exp((ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2))) + (Sigma * sqrt(ExpiryDate) * RandomNum));
-	std::cout << "Iteration equivalent debug: " << DebugVariable << std::endl;
+	// RandomNum = GetOneGaussianByBoxMuller();
+	// std::cout << "RandomNum for debug: " << RandomNum << std::endl;
+	// DebugVariable = sqrt(ExpiryDate);
+	// std::cout << "DebugVariable: " << DebugVariable << std::endl;
+	// DebugVariable = (Sigma * sqrt(ExpiryDate) * RandomNum);
+	// std::cout << "DebugVariable sigma sqrtexpiry random: " << DebugVariable << std::endl;
+	// DebugVariable = ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2));
+	// std::cout << "DebugVariable expiry risk pow sigma 2: " << DebugVariable << std::endl;
+	// DebugVariable =	InitialPrice * exp((ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2))) + (Sigma * sqrt(ExpiryDate) * RandomNum));
+	// std::cout << "Iteration equivalent debug: " << DebugVariable << std::endl;
 			
 	// Main iteration
 	for (i = 1, IterativeValue = 0; i <= Iterations; i++) {
 		// Choose Random (0,1)
-		RandomNum = dist(gen);
+		RandomNum = GetOneGaussianByBoxMuller();
 		// Calculate f(x)
 		CurrentIteration = InitialPrice * exp((ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2))) + (Sigma * sqrt(ExpiryDate) * RandomNum));
 
