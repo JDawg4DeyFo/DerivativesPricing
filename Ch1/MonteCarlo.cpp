@@ -3,7 +3,7 @@
 #include <random>
 
 #include "../Common/Random1.h"
-
+using namespace std;
 
 int main() {
 	int i;
@@ -14,51 +14,51 @@ int main() {
 	double DebugVariable;
 
 	// Ask user for constant values
-	std::cout << "Please provide a risk free return rate: ";
-	if(!(std::cin >> RiskFreeReturn)) {
-		std::cout << "Invalid input. Exiting Program" << std::endl;
+	cout << "Please provide a risk free return rate: ";
+	if(!(cin >> RiskFreeReturn)) {
+		cout << "Invalid input. Exiting Program" << endl;
 		return 0;
 	}
 	// Expiry date
-	std::cout << std::endl;
-	std::cout << "Please provide an expiry date: ";
-	if(!(std::cin >> ExpiryDate)) {
-		std::cout << "Invalid input. Exiting Program" << std::endl;
+	cout << endl;
+	cout << "Please provide an expiry date: ";
+	if(!(cin >> ExpiryDate)) {
+		cout << "Invalid input. Exiting Program" << endl;
 		return 0;
 	}
 	// Initial Price
-	std::cout << std::endl;
-	std::cout << "Please provide an initial price: ";
-	if(!(std::cin >> InitialPrice)) {
-		std::cout << "Invalid input. Exiting Program" << std::endl;
+	cout << endl;
+	cout << "Please provide an initial price: ";
+	if(!(cin >> InitialPrice)) {
+		cout << "Invalid input. Exiting Program" << endl;
 		return 0;
 	}
 	// Sigma?? don't know what this should be
-	std::cout << std::endl;
-	std::cout << "Please provide a sigma: ";
-	if(!(std::cin >> Sigma)) {
-		std::cout << "Invalid input. Exiting Program" << std::endl;
+	cout << endl;
+	cout << "Please provide a sigma: ";
+	if(!(cin >> Sigma)) {
+		cout << "Invalid input. Exiting Program" << endl;
 		return 0;
 	}
 	// Iterations
-	std::cout << "Please speicfy the number of iterations: ";
-	if (!(std::cin >> Iterations)) {
-		std::cout << "Invalid input. Exiting Program" << std::endl;
+	cout << "Please speicfy the number of iterations: ";
+	if (!(cin >> Iterations)) {
+		cout << "Invalid input. Exiting Program" << endl;
 		return 0;
 	}
-	std::cout << std::endl;
+	cout << endl;
 	
 	// Debugging
 	// RandomNum = GetOneGaussianByBoxMuller();
-	// std::cout << "RandomNum for debug: " << RandomNum << std::endl;
+	// cout << "RandomNum for debug: " << RandomNum << endl;
 	// DebugVariable = sqrt(ExpiryDate);
-	// std::cout << "DebugVariable: " << DebugVariable << std::endl;
+	// cout << "DebugVariable: " << DebugVariable << endl;
 	// DebugVariable = (Sigma * sqrt(ExpiryDate) * RandomNum);
-	// std::cout << "DebugVariable sigma sqrtexpiry random: " << DebugVariable << std::endl;
+	// cout << "DebugVariable sigma sqrtexpiry random: " << DebugVariable << endl;
 	// DebugVariable = ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2));
-	// std::cout << "DebugVariable expiry risk pow sigma 2: " << DebugVariable << std::endl;
+	// cout << "DebugVariable expiry risk pow sigma 2: " << DebugVariable << endl;
 	// DebugVariable =	InitialPrice * exp((ExpiryDate * (RiskFreeReturn - .5 * pow(Sigma, 2))) + (Sigma * sqrt(ExpiryDate) * RandomNum));
-	// std::cout << "Iteration equivalent debug: " << DebugVariable << std::endl;
+	// cout << "Iteration equivalent debug: " << DebugVariable << endl;
 			
 	// Main iteration
 	for (i = 1, IterativeValue = 0; i <= Iterations; i++) {
@@ -75,6 +75,6 @@ int main() {
 	// Multiply result by exp(-rT)/N
 	IterativeValue /= Iterations;
 	IterativeValue *= exp(-RiskFreeReturn * ExpiryDate);
-	std::cout << "Calculated Value: " << IterativeValue << std::endl;
+	cout << "Calculated Value: " << IterativeValue << endl;
 	return 0;
 }
